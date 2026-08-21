@@ -6,25 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Organisation {
+public class Salary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    String orgName;
-
-    String number;
-
-    String upiId;
-
-    String accountName;
-
-    LocalDateTime createdAt;
+    @OneToOne(fetch = FetchType.LAZY)
+    User user;
+    String amount;
 }
