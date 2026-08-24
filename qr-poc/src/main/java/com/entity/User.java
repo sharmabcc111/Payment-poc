@@ -19,5 +19,12 @@ public class User {
     String email;
     String upiId;
     String accountName;
+    @Enumerated(EnumType.STRING)
+    Role role;
+
+    public enum Role{
+        ADMIN,MEMBER
+    }
+
 
 }

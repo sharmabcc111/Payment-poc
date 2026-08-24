@@ -8,13 +8,12 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.repository.OrgRepo;
-import com.repository.PaymentQrRepo;
+import com.repository.QrRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,9 +22,9 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class OrgService {
+public class QrServiceImpl {
     private final OrgRepo orgRepo;
-    private final PaymentQrRepo paymentQrRepo;
+    private final QrRepo qrRepo;
 
     public byte[] generateQr(String text) throws WriterException, IOException {
         QRCodeWriter writer = new QRCodeWriter();
@@ -68,7 +67,7 @@ public class OrgService {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        paymentQrRepo.save(paymentQr);
+        qrRepo.save(paymentQr);
         return generateQr(upiString);
 
     }

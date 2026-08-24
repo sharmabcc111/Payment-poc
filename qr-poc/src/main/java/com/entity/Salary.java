@@ -17,5 +17,7 @@ public class Salary {
     Long id;
     @OneToOne(fetch = FetchType.LAZY)
     User user;
+    @Enumerated(EnumType.STRING)
+    User.Role role;
     String amount;
 }

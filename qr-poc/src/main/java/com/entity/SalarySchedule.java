@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -17,42 +18,35 @@ public class SalarySchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-
-    private Organisation organisation;
-
-
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY)
+    User user;
 
     @Enumerated(EnumType.STRING)
     Frequency frequency;
 
+    LocalDate startDate;
 
-    Integer paymentDay;
+    LocalTime executionTime;
+
+    LocalDateTime nextExecutionAt;
 
 
-    LocalTime paymentTime;
-
+   LocalDateTime lastExecutionAt;
 
     String timezone;
 
     @Enumerated(EnumType.STRING)
     ScheduleStatus status;
 
-
     LocalDateTime createdAt;
 
     LocalDateTime updatedAt;
 
     public enum Frequency {
-        MONTHLY,
-        WEEKLY,
-        DAILY
+        MONTHLY, WEEKLY, DAILY
     }
 
     public enum ScheduleStatus {
-        ACTIVE,
-        PAUSED,
-        COMPLETED
+        ACTIVE, PAUSED, COMPLETED
     }
 }
